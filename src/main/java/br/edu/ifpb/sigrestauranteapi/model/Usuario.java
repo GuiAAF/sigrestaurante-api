@@ -1,35 +1,36 @@
 package br.edu.ifpb.sigrestauranteapi.model;
 
-import java.time.LocalDate;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "edital")
-public class Edital {
-	
+@Inheritance(strategy = InheritanceType.JOINED)
+@Table(name = "usuario")
+public class Usuario {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@NotNull
-	private String numero;
-	
+	private String nome;
+
 	@NotNull
-	@JoinColumn(name="data_inicio")
-	private LocalDate dataInicio;
-	
+	private String login;
+
 	@NotNull
-	@JoinColumn(name="data_termino")
-	private LocalDate dataTermino;
-	
-	private Boolean vigente;
+	@Size(min = 6)
+	private String senha;
+
+	@NotNull
+	private boolean ativo;
 
 	public Long getCodigo() {
 		return id;
@@ -39,36 +40,36 @@ public class Edital {
 		this.id = codigo;
 	}
 
-	public String getNumero() {
-		return numero;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setNumero(String numero) {
-		this.numero = numero;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
-	public LocalDate getDataInicio() {
-		return dataInicio;
+	public String getLogin() {
+		return login;
 	}
 
-	public void setDataInicio(LocalDate dataInicio) {
-		this.dataInicio = dataInicio;
+	public void setEmail(String login) {
+		this.login = login;
 	}
 
-	public LocalDate getDataTermino() {
-		return dataTermino;
+	public String getSenha() {
+		return senha;
 	}
 
-	public void setDataTermino(LocalDate dataTermino) {
-		this.dataTermino = dataTermino;
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
-	public Boolean getVigente() {
-		return vigente;
+	public boolean isAtivo() {
+		return ativo;
 	}
 
-	public void setVigente(Boolean vigente) {
-		this.vigente = vigente;
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
 	}
 
 	@Override
@@ -87,7 +88,7 @@ public class Edital {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Edital other = (Edital) obj;
+		Usuario other = (Usuario) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -95,4 +96,5 @@ public class Edital {
 			return false;
 		return true;
 	}
+
 }
