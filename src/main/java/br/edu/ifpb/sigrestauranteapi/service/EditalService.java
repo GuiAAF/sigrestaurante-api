@@ -17,7 +17,7 @@ public class EditalService {
 	@Autowired
 	private EditalRepository editalRepository;
 	
-	public Edital criar(Edital edital) {
+	public Edital salvar(Edital edital) {
 		validarEdital(edital);
 		return editalRepository.save(edital);
 	}

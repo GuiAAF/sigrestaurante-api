@@ -13,24 +13,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.ifpb.sigrestauranteapi.event.RecursoCriadoEvent;
-import br.edu.ifpb.sigrestauranteapi.model.Edital;
-import br.edu.ifpb.sigrestauranteapi.service.EditalService;
+import br.edu.ifpb.sigrestauranteapi.model.Aluno;
+import br.edu.ifpb.sigrestauranteapi.service.AlunoService;
 
 @RestController
-@RequestMapping("/editais")
-public class EditalResource {
+@RequestMapping("/alunos")
+public class AlunoResource {
 	
 	@Autowired
-	private EditalService editalService;
+	private AlunoService alunoService;
 	
 	@Autowired
 	private ApplicationEventPublisher publisher;
 	
 	@PostMapping
-	public ResponseEntity<Edital> salvar(@Valid @RequestBody Edital edital, HttpServletResponse response) {
-		Edital novoEdital = editalService.salvar(edital);
-		publisher.publishEvent(new RecursoCriadoEvent(edital, response, novoEdital.getId()));
-		return ResponseEntity.status(HttpStatus.CREATED).body(novoEdital);
+	public ResponseEntity<Aluno> salvar(@Valid @RequestBody Aluno aluno, HttpServletResponse response){
+		Aluno novoALuno = alunoService.salvar(aluno);
+		publisher.publishEvent(new RecursoCriadoEvent(aluno, response, novoALuno.getId()));
+		return ResponseEntity.status(HttpStatus.CREATED).body(novoALuno);
 	}
 
 }

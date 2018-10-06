@@ -1,0 +1,8 @@
+CREATE TABLE aluno(
+    	id BIGINT(20) PRIMARY KEY,
+	urlfoto VARCHAR(300) DEFAULT NULL,
+	creditos INTEGER NOT NULL,
+	id_edital BIGINT(20) NOT NULL,
+	FOREIGN KEY (id_edital) REFERENCES edital(id),
+	FOREIGN KEY (id) REFERENCES usuario(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
